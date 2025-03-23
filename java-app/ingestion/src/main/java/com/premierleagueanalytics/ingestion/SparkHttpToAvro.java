@@ -40,6 +40,7 @@ class SparkHttpToAvro {
             JsonNode rootNode = parseJson(response);
             JsonNode teamsNode = rootNode.get("teams");
 
+            // TODO: Understand the writing process better
             DatumWriter<TeamInfo> datumWriter = new SpecificDatumWriter<>(TeamInfo.class);
             try (DataFileWriter<TeamInfo> dataFileWriter = new DataFileWriter<>(datumWriter)) {
                 dataFileWriter.create(TeamInfo.getClassSchema(), new File("teams.avro"));
