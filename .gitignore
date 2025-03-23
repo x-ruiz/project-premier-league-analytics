@@ -2,5 +2,5 @@
 *.class
 
 # Ingestion Java App
-premier-league-analytics/target
-premier-league-analytics/.mvn
+java-app/ingestion/target
+java-app/ingestion/.mvn
