@@ -1,2 +1,6 @@
 .idea
 *.class
+
+# Ingestion Java App
+premier-league-analytics/target
+premier-league-analytics/.mvn
