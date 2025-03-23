@@ -36,14 +36,14 @@ class SparkHttpToAvro {
     // endpoints and prevent file spread.
     public void getTeams() {
         try {
-            String response = httpGetRequest("/v4/teams");
+            String response = httpGetRequest("/v4/teams?limit=500");
             JsonNode rootNode = parseJson(response);
             JsonNode teamsNode = rootNode.get("teams");
 
             // TODO: Understand the writing process better
             DatumWriter<TeamInfo> datumWriter = new SpecificDatumWriter<>(TeamInfo.class);
             try (DataFileWriter<TeamInfo> dataFileWriter = new DataFileWriter<>(datumWriter)) {
-                dataFileWriter.create(TeamInfo.getClassSchema(), new File("teams.avro"));
+                dataFileWriter.create(TeamInfo.getClassSchema(), new File("ingestion/target/generated-sources/teams.avro"));
 
                 if (teamsNode.isArray()) {
                     for (JsonNode jsonNode : teamsNode) {
@@ -69,6 +69,16 @@ class SparkHttpToAvro {
     }
 
     private TeamInfo createTeamInfo(JsonNode node) {
+        // Handle the case that lastUpdated is a null
+        String lastUpdated = node.get("lastUpdated").asText();
+        long epochTime;
+
+        if (lastUpdated != "null") {
+            epochTime = Instant.parse(lastUpdated).toEpochMilli();
+        } else {
+            epochTime = 0;
+        }
+
         return TeamInfo.newBuilder()
                 .setId(node.get("id").asInt())
                 .setName(node.get("name").asText())
@@ -80,7 +90,7 @@ class SparkHttpToAvro {
                 .setFounded(node.get("founded").asInt())
                 .setClubColors(node.get("clubColors").asText())
                 .setVenue(node.get("venue").asText())
-                .setLastUpdated(Instant.parse(node.get("lastUpdated").asText()).toEpochMilli())
+                .setLastUpdated(epochTime)
                 .build();
     }
 
