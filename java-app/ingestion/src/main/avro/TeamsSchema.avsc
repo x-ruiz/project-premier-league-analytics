@@ -1,6 +1,6 @@
 {
   "type": "record",
-  "name": "teamsInfo",
+  "name": "TeamInfo",
   "namespace": "com.premierleagueanalytics.ingestion",
   "fields": [
     {
