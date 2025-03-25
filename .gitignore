@@ -4,3 +4,9 @@
 # Ingestion Java App
 java-app/ingestion/target
 java-app/ingestion/.mvn
+
+# Terraform Infrastructure Code
+terraform/.terraform.lock.hcl
+terraform/.terraform
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup

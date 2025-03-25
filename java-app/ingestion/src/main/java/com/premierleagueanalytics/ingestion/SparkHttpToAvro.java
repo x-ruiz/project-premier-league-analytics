@@ -35,6 +35,7 @@ class SparkHttpToAvro {
     // possibly a models class? Benefit of one class per model is we can combine related
     // endpoints and prevent file spread.
     public void getTeams() {
+        String outputAvroPath = "ingestion/target/generated-sources/teams.avro";
         try {
             String response = httpGetRequest("/v4/teams?limit=500");
             JsonNode rootNode = parseJson(response);
@@ -43,7 +44,7 @@ class SparkHttpToAvro {
             // TODO: Understand the writing process better
             DatumWriter<TeamInfo> datumWriter = new SpecificDatumWriter<>(TeamInfo.class);
             try (DataFileWriter<TeamInfo> dataFileWriter = new DataFileWriter<>(datumWriter)) {
-                dataFileWriter.create(TeamInfo.getClassSchema(), new File("ingestion/target/generated-sources/teams.avro"));
+                dataFileWriter.create(TeamInfo.getClassSchema(), new File(outputAvroPath));
 
                 if (teamsNode.isArray()) {
                     for (JsonNode jsonNode : teamsNode) {
@@ -53,6 +54,9 @@ class SparkHttpToAvro {
                 }
             }
 
+            // Upload AVRO file to gcs bucket
+            StorageBucket bucket = new StorageBucket("pla-landing-zone-bkt-us");
+            bucket.uploadObject("avro/teams.avro", outputAvroPath);
 //            System.out.println("Teams Response:\n" + response);
         } catch (URISyntaxException | InterruptedException | IOException e) {
             System.err.println("Request to get teams failed with error: " + e.getMessage());
