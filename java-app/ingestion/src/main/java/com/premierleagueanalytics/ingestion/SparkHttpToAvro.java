@@ -8,6 +8,7 @@ import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 import java.time.Instant;
 import java.io.File;
+import java.time.LocalDate;
 
 
 // Avro Related
@@ -35,7 +36,10 @@ class SparkHttpToAvro {
     // possibly a models class? Benefit of one class per model is we can combine related
     // endpoints and prevent file spread.
     public void getTeams() {
+        LocalDate currentDate = LocalDate.now();
         String outputAvroPath = "ingestion/target/generated-sources/teams.avro";
+        String outputGCSPath = "avro/dt=" + currentDate + "/teams.avro";
+
         try {
             String response = httpGetRequest("/v4/teams?limit=500");
             JsonNode rootNode = parseJson(response);
@@ -56,7 +60,7 @@ class SparkHttpToAvro {
 
             // Upload AVRO file to gcs bucket
             StorageBucket bucket = new StorageBucket("pla-landing-zone-bkt-us");
-            bucket.uploadObject("avro/teams.avro", outputAvroPath);
+            bucket.uploadObject(outputGCSPath, outputAvroPath);
 //            System.out.println("Teams Response:\n" + response);
         } catch (URISyntaxException | InterruptedException | IOException e) {
             System.err.println("Request to get teams failed with error: " + e.getMessage());

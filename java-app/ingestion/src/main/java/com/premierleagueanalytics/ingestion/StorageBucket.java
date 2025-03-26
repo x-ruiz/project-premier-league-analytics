@@ -8,7 +8,6 @@ import com.google.cloud.storage.StorageOptions;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-
 class StorageBucket {
     String projectName = "premier-league-analytics";
     String bucketName;
