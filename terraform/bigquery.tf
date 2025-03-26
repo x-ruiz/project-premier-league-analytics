@@ -3,8 +3,9 @@ resource "google_bigquery_dataset" "pla_landing" {
   location   = "us"
 }
 resource "google_bigquery_table" "pla_raw" {
-  dataset_id = "pla_landing_us"
-  table_id   = "pla_teams_raw"
+  dataset_id          = "pla_landing_us"
+  table_id            = "t_pla_teams_raw"
+  deletion_protection = false
 
   external_data_configuration {
     autodetect = true
