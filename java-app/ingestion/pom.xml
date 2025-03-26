@@ -67,6 +67,17 @@
 
     <build>
         <plugins>
+            <!-- Jib containerization tool -->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <to>
+                        <image>gcr.io/premier-league-analytics/ingestion-java-app</image>
+                    </to>
+                </configuration>
+            </plugin>
             <!-- AVRO File generation -->
             <plugin>
                 <groupId>org.apache.avro</groupId>
