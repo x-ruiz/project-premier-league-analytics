@@ -13,5 +13,5 @@ run-ingestion:
 	java -jar $(INGESTION_JAR_NAME)
 
 publish-ingestion:
-	mkdir -p ~/.java/ingestion/cache
-	mvn compile jib:build -Djib.applicationCache=~/.java/ingestion/cache -pl ingestion
+	mkdir -p $(HOME)/jib-caches/java-app
+	mvn compile jib:build -Djib.applicationCache=$(HOME)/jib-cachesjava-app -pl ingestion

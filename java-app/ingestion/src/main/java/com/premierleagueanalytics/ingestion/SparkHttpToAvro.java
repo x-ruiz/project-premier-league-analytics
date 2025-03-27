@@ -37,7 +37,7 @@ class SparkHttpToAvro {
     // endpoints and prevent file spread.
     public void getTeams() {
         LocalDate currentDate = LocalDate.now();
-        String outputAvroPath = "ingestion/target/generated-sources/teams.avro";
+        String outputAvroPath = "teams.avro";
         String outputGCSPath = "avro/dt=" + currentDate + "/teams.avro";
 
         try {

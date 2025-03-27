@@ -13,6 +13,8 @@ Application Default Credentials (ADC) must be setup.
 
 ``gcloud auth application-default login`` -> "~/.config/gcloud/application_default_credentials.json"
 
+``gcloud auth configure-docker `` -> To authenticate with artifact registry
+
 1. Install Terraform
 
 ## Environment Variables

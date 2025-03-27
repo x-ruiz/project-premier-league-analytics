@@ -74,8 +74,11 @@
                 <version>3.4.0</version>
                 <configuration>
                     <to>
-                        <image>gcr.io/premier-league-analytics/ingestion-java-app</image>
+                        <image>us-central1-docker.pkg.dev/premier-league-analytics/java/ingestion:latest</image>
                     </to>
+                    <container>
+                        <mainClass>com.premierleagueanalytics.ingestion.App</mainClass>
+                    </container>
                 </configuration>
             </plugin>
             <!-- AVRO File generation -->
