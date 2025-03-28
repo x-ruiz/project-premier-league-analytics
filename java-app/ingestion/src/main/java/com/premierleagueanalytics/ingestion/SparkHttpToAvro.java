@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.time.Instant;
 import java.io.File;
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 
 // Avro Related
@@ -36,7 +37,7 @@ class SparkHttpToAvro {
     // possibly a models class? Benefit of one class per model is we can combine related
     // endpoints and prevent file spread.
     public void getTeams() {
-        LocalDate currentDate = LocalDate.now();
+        LocalDate currentDate = LocalDate.now(ZoneId.of("America/Chicago"));
         String outputAvroPath = "teams.avro";
         String outputGCSPath = "avro/dt=" + currentDate + "/teams.avro";
 
