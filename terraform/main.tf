@@ -53,7 +53,7 @@ resource "google_cloud_run_v2_job" "ingestion_teams" {
 resource "google_cloud_scheduler_job" "ingestion_teams" {
   name        = "ingestion_teams"
   description = "Schedule for running the batch ingestion job for loading teams data"
-  schedule    = "0 1 * * *"
+  schedule    = "0 0 * * 6"
   time_zone   = "America/Chicago"
 
   retry_config {
