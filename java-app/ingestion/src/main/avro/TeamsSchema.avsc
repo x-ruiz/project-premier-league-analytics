@@ -1,0 +1,62 @@
+{
+  "type": "record",
+  "name": "TeamInfo",
+  "namespace": "com.premierleagueanalytics.ingestion",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "shortName",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "tla",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "crest",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "website",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "founded",
+      "type": "int",
+      "default": 0
+    },
+    {
+      "name": "clubColors",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "venue",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "lastUpdated",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "default": 0
+    }
+  ]
+}
