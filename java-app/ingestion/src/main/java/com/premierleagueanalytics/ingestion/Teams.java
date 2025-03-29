@@ -1,19 +1,20 @@
+package com.premierleagueanalytics.ingestion;
+
+import com.premierleagueanalytics.ingestion.TeamInfo;
+
 class Teams {
     public void main(String[] args) {
-        LocalDate currentDate = LocalDate.now(ZoneId.of("America/Chicago"));
         String outputAvroPath = "teams.avro";
 
         try {
-            String response = httpGetRequest("/v4/teams?limit=500");
-            JsonNode rootNode = parseJson(response);
+            String response = Api.httpGetRequest("/v4/teams?limit=500");
+            JsonNode rootNode = Api.parseJson(response);
             JsonNode teamsNode = rootNode.get("teams");
 
             // Upload AVRO file to gcs bucket
-            StorageBucket bucket = new StorageBucket("pla-landing-zone-bkt-us");
-            bucket.uploadObject(outputAvroPath);
-//            System.out.println("Teams Response:\n" + response);
+            StorageBucket.uploadObject(outputAvroPath);
         } catch (URISyntaxException | InterruptedException | IOException e) {
-            System.err.println("Request to get teams failed with error: " + e.getMessage());
+            System.err.println("Processing teams data failed with error: " + e.getMessage());
         } catch (Exception e) {
             System.err.println("Failed to parse json with error: " + e.getMessage());
         }

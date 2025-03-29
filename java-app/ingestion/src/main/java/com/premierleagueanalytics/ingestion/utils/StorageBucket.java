@@ -10,21 +10,15 @@ import java.nio.file.Paths;
 
 class StorageBucket {
     String projectName = "premier-league-analytics";
-    String bucketName;
+    String bucketName = "pla-landing-zone-bkt-us";
 
-    public StorageBucket(String bucketName) {
-        // The ID of your GCS bucket
-        // String bucketName = "your-unique-bucket-name";
-        this.bucketName = bucketName;
-
-    }
-
-    public void uploadObject(String objectName) throws IOException {
+    public static void uploadObject(String objectName) throws IOException {
         // The ID of your GCS object
         // String objectName = "your-object-name";
 
         // The path to your file to upload
         // String filePath = "path/to/your/file"
+        LocalDate currentDate = LocalDate.now(ZoneId.of("America/Chicago"));
         filePath = "avro/dt=" + currentDate + "/" + objectName;
         Storage storage = StorageOptions.newBuilder().setProjectId(this.projectName).build().getService();
         BlobId blobId = BlobId.of(this.bucketName, objectName); // identifier for location

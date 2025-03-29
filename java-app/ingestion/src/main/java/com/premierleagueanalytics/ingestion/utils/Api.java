@@ -13,7 +13,6 @@ import java.time.ZoneId;
 
 
 // Avro Related
-import com.premierleagueanalytics.ingestion.TeamInfo;
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.io.DatumWriter;
 import org.apache.avro.specific.SpecificDatumWriter;
@@ -26,31 +25,17 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.lang.InterruptedException;
 
-class Utils {
+class Api {
     private String url = "https://api.football-data.org";
 
-    private JsonNode parseJson(String jsonString) throws Exception {
+    public static JsonNode parseJson(String jsonString) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.readTree(jsonString);
     }
 
-    private void writeAvro() {
-        // TODO: Understand the writing process better
-        DatumWriter<TeamInfo> datumWriter = new SpecificDatumWriter<>(TeamInfo.class);
-        try (DataFileWriter<TeamInfo> dataFileWriter = new DataFileWriter<>(datumWriter)) {
-            dataFileWriter.create(TeamInfo.getClassSchema(), new File(outputAvroPath));
-
-            if (teamsNode.isArray()) {
-                for (JsonNode jsonNode : teamsNode) {
-                    TeamInfo teamInfo = createTeamInfo(jsonNode);
-                    dataFileWriter.append(teamInfo);
-                }
-            }
-        }
-    }
 
     // TODO: Extract this method into its own API class
-    private String httpGetRequest(String endpoint) throws URISyntaxException, IOException, InterruptedException {
+    public static String httpGetRequest(String endpoint) throws URISyntaxException, IOException, InterruptedException {
         String url = this.url + endpoint;
         String apiKey = System.getenv("API_KEY");
         try {
