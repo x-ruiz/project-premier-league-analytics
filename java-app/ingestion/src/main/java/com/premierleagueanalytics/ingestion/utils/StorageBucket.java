@@ -19,13 +19,13 @@ class StorageBucket {
 
     }
 
-    public void uploadObject(String objectName, String filePath) throws IOException {
+    public void uploadObject(String objectName) throws IOException {
         // The ID of your GCS object
         // String objectName = "your-object-name";
 
         // The path to your file to upload
         // String filePath = "path/to/your/file"
-
+        filePath = "avro/dt=" + currentDate + "/" + objectName;
         Storage storage = StorageOptions.newBuilder().setProjectId(this.projectName).build().getService();
         BlobId blobId = BlobId.of(this.bucketName, objectName); // identifier for location
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build(); // for us to define metadata about object

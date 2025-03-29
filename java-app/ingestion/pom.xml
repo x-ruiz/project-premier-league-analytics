@@ -76,9 +76,9 @@
                     <to>
                         <image>us-central1-docker.pkg.dev/premier-league-analytics/java/ingestion:latest</image>
                     </to>
-                    <container>
-                        <mainClass>com.premierleagueanalytics.ingestion.App</mainClass>
-                    </container>
+                    <!--                    <container>-->
+                    <!--                        <mainClass>com.premierleagueanalytics.ingestion.App</mainClass>-->
+                    <!--                    </container>-->
                 </configuration>
             </plugin>
             <!-- AVRO File generation -->
