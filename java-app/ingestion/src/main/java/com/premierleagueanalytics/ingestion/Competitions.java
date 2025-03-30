@@ -17,8 +17,7 @@ import java.lang.InterruptedException;
 
 class Competitions {
     public static void main(String[] args) {
-        String outputAvroPath = "ingestion/competitions.avro";
-        String gcsAvroFileName = "competitions.avro";
+        String outputAvroPath = "competitions.avro";
 
         try {
             String response = Api.httpGetRequest("/v4/competitions");
@@ -34,7 +33,7 @@ class Competitions {
             AvroUtils.writeAvro(CompetitionInfo.class, outputAvroPath, competitionNode, createCompetitionInfoFunction);
 
             // Upload AVRO file to gcs bucket
-            StorageBucket.uploadObject(gcsAvroFileName, outputAvroPath, "competitions");
+            StorageBucket.uploadObject(outputAvroPath, "competitions");
         } catch (URISyntaxException | InterruptedException | IOException e) {
             System.err.println("Processing competitions data failed with error: " + e);
         } catch (Exception e) {

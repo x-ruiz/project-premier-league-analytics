@@ -15,7 +15,7 @@ class StorageBucket {
     static String projectName = "premier-league-analytics";
     static String bucketName = "pla-landing-zone-bkt-us";
 
-    public static void uploadObject(String objectName, String sourcePath, String className) throws IOException {
+    public static void uploadObject(String sourcePath, String className) throws IOException {
         // The ID of your GCS object
         // String objectName = "your-object-name";
 

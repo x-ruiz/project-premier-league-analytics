@@ -14,8 +14,7 @@ import java.lang.InterruptedException;
 
 class Teams {
     public static void main(String[] args) {
-        String outputAvroPath = "ingestion/teams.avro";
-        String gcsAvroFileName = "teams.avro";
+        String outputAvroPath = "teams.avro";
 
         try {
             String response = Api.httpGetRequest("/v4/teams?limit=500");
@@ -31,7 +30,7 @@ class Teams {
             AvroUtils.writeAvro(TeamInfo.class, outputAvroPath, teamsNode, createTeamInfoFunction);
 
             // Upload AVRO file to gcs bucket
-            StorageBucket.uploadObject(gcsAvroFileName, outputAvroPath, "teams");
+            StorageBucket.uploadObject(outputAvroPath, "teams");
         } catch (URISyntaxException | InterruptedException | IOException e) {
             System.err.println("Processing teams data failed with error: " + e);
         } catch (Exception e) {
