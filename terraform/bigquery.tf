@@ -6,7 +6,7 @@ resource "google_bigquery_table" "pla_landing_raw" {
   for_each = toset(local.tables)
 
   dataset_id          = "pla_landing_us"
-  table_id            = "t_pla_${each.key}_raw"
+  table_id            = "t_${each.key}_raw"
   deletion_protection = false
 
   external_data_configuration {
