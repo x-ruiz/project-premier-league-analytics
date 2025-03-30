@@ -4,7 +4,6 @@ import com.premierleagueanalytics.ingestion.TeamInfo;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-import java.time.Instant;
 import java.util.function.Function;
 
 // Exception Imports
@@ -32,7 +31,7 @@ class Teams {
             AvroUtils.writeAvro(TeamInfo.class, outputAvroPath, teamsNode, createTeamInfoFunction);
 
             // Upload AVRO file to gcs bucket
-            StorageBucket.uploadObject(gcsAvroFileName, outputAvroPath);
+            StorageBucket.uploadObject(gcsAvroFileName, outputAvroPath, "teams");
         } catch (URISyntaxException | InterruptedException | IOException e) {
             System.err.println("Processing teams data failed with error: " + e);
         } catch (Exception e) {
@@ -40,16 +39,10 @@ class Teams {
         }
     }
 
+    // Handles transposing the jsonNode response from the API into the Avro generated class
     public static TeamInfo createTeamInfo(JsonNode node) {
-        // Handle the case that lastUpdated is a null
         String lastUpdated = node.get("lastUpdated").asText();
-        long epochTime;
-
-        if (lastUpdated != "null") {
-            epochTime = Instant.parse(lastUpdated).toEpochMilli();
-        } else {
-            epochTime = 0;
-        }
+        long epochTime = AvroUtils.timestampConversion(lastUpdated);
 
         return TeamInfo.newBuilder()
                 .setId(node.get("id").asInt())

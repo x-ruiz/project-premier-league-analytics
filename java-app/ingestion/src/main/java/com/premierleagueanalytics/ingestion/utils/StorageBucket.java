@@ -15,14 +15,14 @@ class StorageBucket {
     static String projectName = "premier-league-analytics";
     static String bucketName = "pla-landing-zone-bkt-us";
 
-    public static void uploadObject(String objectName, String sourcePath) throws IOException {
+    public static void uploadObject(String objectName, String sourcePath, String className) throws IOException {
         // The ID of your GCS object
         // String objectName = "your-object-name";
 
         // The path to your file to upload
         // String filePath = "path/to/your/file"
         LocalDate currentDate = LocalDate.now(ZoneId.of("America/Chicago"));
-        String objectPath = "avro/dt=" + currentDate + "/" + objectName;
+        String objectPath = className + "/dt=" + currentDate + "/data.avro";
         Storage storage = StorageOptions.newBuilder().setProjectId(projectName).build().getService();
         BlobId blobId = BlobId.of(bucketName, objectPath); // identifier for location
         BlobInfo blobInfo = BlobInfo.newBuilder(blobId).build(); // for us to define metadata about object

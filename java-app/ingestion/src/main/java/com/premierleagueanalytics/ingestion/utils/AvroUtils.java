@@ -14,8 +14,24 @@ import java.lang.InstantiationException;
 import java.lang.IllegalAccessException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.function.Function;
+import java.time.Instant;
+
 
 class AvroUtils {
+
+    // Handles converting the string timestamp from the API into a long timestamp in proper format
+    public static long timestampConversion(String timestamp) {
+        // Handle the case that lastUpdated is a null
+        long epochTime;
+
+        if (timestamp != "null") {
+            epochTime = Instant.parse(timestamp).toEpochMilli();
+        } else {
+            epochTime = 0;
+        }
+        return epochTime;
+    }
+
     public static <T extends SpecificRecordBase & SpecificRecord> void writeAvro(
             Class<T> schemaClass,
             String outputAvroPath,
