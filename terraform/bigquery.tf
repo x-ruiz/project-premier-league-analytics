@@ -2,20 +2,22 @@ resource "google_bigquery_dataset" "pla_landing" {
   dataset_id = "pla_landing_us"
   location   = "us"
 }
-resource "google_bigquery_table" "pla_raw" {
+resource "google_bigquery_table" "pla_landing_raw" {
+  for_each = toset(local.tables)
+
   dataset_id          = "pla_landing_us"
-  table_id            = "t_pla_teams_raw"
+  table_id            = "t_pla_${each.key}_raw"
   deletion_protection = false
 
   external_data_configuration {
     autodetect = true
     source_uris = [
-      "gs://pla-landing-zone-bkt-us/avro/dt=*/teams.avro"
+      "gs://pla-landing-zone-bkt-us/${each.key}/dt=*/data.avro"
     ]
     source_format = "AVRO"
     hive_partitioning_options {
       mode                     = "STRINGS"
-      source_uri_prefix        = "gs://pla-landing-zone-bkt-us/avro"
+      source_uri_prefix        = "gs://pla-landing-zone-bkt-us/${each.key}"
       require_partition_filter = true
     }
   }
