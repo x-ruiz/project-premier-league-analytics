@@ -120,11 +120,11 @@
                         <descriptorRefs>
                             <descriptorRef>jar-with-dependencies</descriptorRef>
                         </descriptorRefs>
-                        <archive>
-                            <manifest>
-                                <mainClass>com.premierleagueanalytics.ingestion.App</mainClass>
-                            </manifest>
-                        </archive>
+                        <!--                        <archive>-->
+                        <!--                            <manifest>-->
+                        <!--                                <mainClass>com.premierleagueanalytics.ingestion.App</mainClass>-->
+                        <!--                            </manifest>-->
+                        <!--                        </archive>-->
                     </configuration>
                     <executions>
                         <execution>

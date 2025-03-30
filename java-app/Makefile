@@ -10,7 +10,7 @@ build-ingestion:
 	mvn clean package assembly:single -pl ingestion # includes dependencies
 
 run-ingestion:
-	java -jar $(INGESTION_JAR_NAME)
+	java -cp $(INGESTION_JAR_NAME) com.premierleagueanalytics.ingestion.Teams
 
 publish-ingestion:
 	mkdir -p $(HOME)/jib-caches/java-app

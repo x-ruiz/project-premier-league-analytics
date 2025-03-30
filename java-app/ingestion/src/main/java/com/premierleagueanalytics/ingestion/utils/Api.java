@@ -6,10 +6,7 @@ import java.net.http.HttpResponse;
 import java.net.URI;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-import java.time.Instant;
 import java.io.File;
-import java.time.LocalDate;
-import java.time.ZoneId;
 
 
 // Avro Related
@@ -26,7 +23,7 @@ import java.net.URISyntaxException;
 import java.lang.InterruptedException;
 
 class Api {
-    private String url = "https://api.football-data.org";
+    private static String baseUrl = "https://api.football-data.org";
 
     public static JsonNode parseJson(String jsonString) throws Exception {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -36,7 +33,7 @@ class Api {
 
     // TODO: Extract this method into its own API class
     public static String httpGetRequest(String endpoint) throws URISyntaxException, IOException, InterruptedException {
-        String url = this.url + endpoint;
+        String url = baseUrl + endpoint;
         String apiKey = System.getenv("API_KEY");
         try {
             HttpRequest request = HttpRequest.newBuilder()
