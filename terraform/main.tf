@@ -1,3 +1,6 @@
+locals {
+  ingestion_jar = "ingestion-1.0-SNAPSHOT-jar-with-dependencies.jar"
+}
 ###
 # GCS Setup
 ###
@@ -33,6 +36,12 @@ resource "google_cloud_run_v2_job" "ingestion_teams" {
       service_account = google_service_account.ingestion.email
       containers {
         image = "us-central1-docker.pkg.dev/premier-league-analytics/java/ingestion:latest"
+        command = ["java"]
+        args = [
+          "-cp",
+          "/app/${local.ingestion_jar}",
+          "com.premierleagueanalytics.ingestion.Teams"
+        ]
         env {
           name = "API_KEY"
           value_source {
