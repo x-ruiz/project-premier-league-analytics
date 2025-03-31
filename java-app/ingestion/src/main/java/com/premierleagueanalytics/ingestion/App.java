@@ -1,13 +1,8 @@
 package com.premierleagueanalytics.ingestion;
 
-/**
- * Hello world!
- */
-public class App {
+class App {
+    // Dummy class for jib to package. Not to be used as an entry point.
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-
-        SparkHttpToAvro httpToAvro = new SparkHttpToAvro();
-        httpToAvro.getTeams();
+        System.out.println("Premier League Analytics Ingestion");
     }
 }

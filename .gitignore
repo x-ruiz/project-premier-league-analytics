@@ -5,6 +5,8 @@
 java-app/ingestion/target
 java-app/ingestion/.mvn
 java-app/cache
+java-app/ingestion/*.avro
+java-app/*.avro
 
 # Terraform Infrastructure Code
 terraform/.terraform.lock.hcl

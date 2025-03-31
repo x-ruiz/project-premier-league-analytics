@@ -1,0 +1,105 @@
+{
+  "type": "record",
+  "name": "CompetitionInfo",
+  "namespace": "com.premierleagueanalytics.ingestion",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "area",
+      "type": {
+        "type": "record",
+        "name": "Area",
+        "fields": [
+          {
+            "name": "id",
+            "type": "int"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "type": "string"
+          },
+          {
+            "name": "flag",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "code",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "type",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "emblem",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "plan",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "currentSeason",
+      "type": {
+        "type": "record",
+        "name": "CurrentSeason",
+        "fields": [
+          {
+            "name": "id",
+            "type": "int"
+          },
+          {
+            "name": "startDate",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "endDate",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "currentMatchday",
+            "type": "int",
+            "default": 0
+          },
+          {
+            "name": "winner",
+            "type": "string",
+            "default": ""
+          }
+        ]
+      }
+    },
+    {
+      "name": "numberOfAvailableSeasons",
+      "type": "int",
+      "default": 0
+    },
+    {
+      "name": "lastUpdated",
+      "type": "long",
+      "logicalType": "timestamp-millis",
+      "default": 0
+    }
+  ]
+}
