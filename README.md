@@ -2,7 +2,7 @@
 
 Data engineering project based on premier league stats
 
-![premier-league-stats-architecture](https://github.com/user-attachments/assets/84c87b2e-c2cb-46b3-8201-e0af729e0003)
+![Premier League Stats Dashboard](https://github.com/user-attachments/assets/c238e0c9-0eb1-4101-bb22-8034b186612e)
 
 # Set Up
 
