@@ -4,13 +4,6 @@ Data engineering project based on premier league stats
 
 ![premier-league-stats-architecture](https://github.com/user-attachments/assets/84c87b2e-c2cb-46b3-8201-e0af729e0003)
 
-## Processing Flow
-
-### Teams
-
-Combine landing zone raw data of teams list with the teams/id endpoint to enhance teams tables with additional metadata
-like coaches, players etc.
-
 # Set Up
 
 ## GCP Authentication
@@ -28,6 +21,8 @@ Application Default Credentials (ADC) must be setup.
 
 API_KEY | Authentication Key for the football api
 
+# Ingestion Flow
+
 ## Adding a new endpoint to ingest
 
 1. Add avsc AVRO schema file based on endpoint
@@ -39,3 +34,10 @@ API_KEY | Authentication Key for the football api
 7. run ``terraform plan``
 8. run ``terraform apply``
 9. Validate ingestion pipelines are set up
+
+# Processing Flow
+
+## Teams
+
+Combine landing zone raw data of teams list with the teams/id endpoint to enhance teams tables with additional metadata
+like coaches, players etc.
