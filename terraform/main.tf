@@ -1,6 +1,3 @@
-locals {
-  ingestion_jar = "ingestion-1.0-SNAPSHOT-jar-with-dependencies.jar"
-}
 ###
 # GCS Setup
 ###
@@ -27,9 +24,11 @@ resource "google_secret_manager_secret_version" "football_api_key_version" {
 ###
 # Cloud Run Job Setup
 ###
-resource "google_cloud_run_v2_job" "ingestion_teams" {
+resource "google_cloud_run_v2_job" "ingestion" {
+  for_each = local.ingestion_schedule_map
+
   location            = "us-central1"
-  name                = "ingestion-teams"
+  name                = "ingestion-${each.key}"
   deletion_protection = false
   template {
     template {
@@ -40,7 +39,7 @@ resource "google_cloud_run_v2_job" "ingestion_teams" {
         args = [
           "-cp",
           "@/app/jib-classpath-file",
-          "com.premierleagueanalytics.ingestion.Teams"
+          "com.premierleagueanalytics.ingestion.${title(each.key)}"
         ]
         env {
           name = "API_KEY"
@@ -59,10 +58,11 @@ resource "google_cloud_run_v2_job" "ingestion_teams" {
 ###
 # Cloud Scheduler Job Setup
 ###
-resource "google_cloud_scheduler_job" "ingestion_teams" {
-  name        = "ingestion_teams"
-  description = "Schedule for running the batch ingestion job for loading teams data"
-  schedule    = "0 1 * * 6"
+resource "google_cloud_scheduler_job" "ingestion" {
+  for_each    = local.ingestion_schedule_map
+  name        = "ingestion_${each.key}"
+  description = "Schedule for running the batch ingestion job for loading ${each.key} data"
+  schedule    = each.value
   time_zone   = "America/Chicago"
 
   retry_config {
@@ -70,7 +70,7 @@ resource "google_cloud_scheduler_job" "ingestion_teams" {
   }
 
   http_target {
-    uri         = "https://${google_cloud_run_v2_job.ingestion_teams.location}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${google_cloud_run_v2_job.ingestion_teams.project}/jobs/${google_cloud_run_v2_job.ingestion_teams.name}:run"
+    uri         = "https://${google_cloud_run_v2_job.ingestion[each.key].location}-run.googleapis.com/apis/run.googleapis.com/v1/namespaces/${google_cloud_run_v2_job.ingestion[each.key].project}/jobs/${google_cloud_run_v2_job.ingestion[each.key].name}:run"
     http_method = "POST"
 
     oauth_token {

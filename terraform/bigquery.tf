@@ -3,7 +3,7 @@ resource "google_bigquery_dataset" "pla_landing" {
   location   = "us"
 }
 resource "google_bigquery_table" "pla_landing_raw" {
-  for_each = toset(local.tables)
+  for_each = local.ingestion_schedule_map
 
   dataset_id          = "pla_landing_us"
   table_id            = "t_${each.key}_raw"
