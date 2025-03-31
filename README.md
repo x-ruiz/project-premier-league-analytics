@@ -27,3 +27,15 @@ Application Default Credentials (ADC) must be setup.
 ## Environment Variables
 
 API_KEY | Authentication Key for the football api
+
+## Adding a new endpoint to ingest
+
+1. Add avsc AVRO schema file based on endpoint
+2. run ``make build-ingestion`` -> generates avro class to be used
+3. Make java code changes to deconstruct api response to avro generated class
+4. run ``make build-ingestion`` -> update java jar locally
+5. run ``make run-ingestion`` -> Uploads first file to gcs bucket to initialize ingestion process
+6. Add the schedule for the new endpoint in terraform/locals.tf
+7. run ``terraform plan``
+8. run ``terraform apply``
+9. Validate ingestion pipelines are set up

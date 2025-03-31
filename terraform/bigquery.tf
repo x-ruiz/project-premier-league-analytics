@@ -13,6 +13,8 @@ resource "google_bigquery_table" "pla_landing_raw" {
     autodetect = true
     source_uris = [
       "gs://pla-landing-zone-bkt-us/${each.key}/dt=*/data.avro"
+      // this is a problem because ingestion pipelines are built in this same module
+      // so the table won't get created until the pipeline is created and data exists in the bucket
     ]
     source_format = "AVRO"
     hive_partitioning_options {
