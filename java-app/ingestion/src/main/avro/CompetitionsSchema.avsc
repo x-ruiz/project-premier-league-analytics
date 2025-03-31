@@ -8,29 +8,8 @@
       "type": "int"
     },
     {
-      "name": "area",
-      "type": {
-        "type": "record",
-        "name": "Area",
-        "fields": [
-          {
-            "name": "id",
-            "type": "int"
-          },
-          {
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "name": "code",
-            "type": "string"
-          },
-          {
-            "name": "flag",
-            "type": "string"
-          }
-        ]
-      }
+      "name": "areaId",
+      "type": "int"
     },
     {
       "name": "name",

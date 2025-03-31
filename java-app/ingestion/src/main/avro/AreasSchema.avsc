@@ -1,0 +1,36 @@
+{
+  "type": "record",
+  "name": "AreaInfo",
+  "namespace": "com.premierleagueanalytics.ingestion",
+  "fields": [
+    {
+      "name": "id",
+      "type": "int"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "countryCode",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "flag",
+      "type": "string",
+      "default": ""
+    },
+    {
+      "name": "parentAreaId",
+      "type": "int",
+      "default": -1
+    },
+    {
+      "name": "parentArea",
+      "type": "string",
+      "default": ""
+    }
+  ]
+}

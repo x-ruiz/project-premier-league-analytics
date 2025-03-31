@@ -1,7 +1,6 @@
 package com.premierleagueanalytics.ingestion;
 
 import com.premierleagueanalytics.ingestion.CompetitionInfo;
-import com.premierleagueanalytics.ingestion.Area;
 import com.premierleagueanalytics.ingestion.CurrentSeason;
 
 
@@ -48,12 +47,6 @@ class Competitions {
 
         // Deconstruct Area subrecord
         JsonNode areaNode = node.get("area");
-        Area areaInfo = Area.newBuilder()
-                .setId(areaNode.get("id").asInt())
-                .setName(areaNode.get("name").asText())
-                .setCode(areaNode.get("code").asText())
-                .setFlag(areaNode.get("flag").asText())
-                .build();
 
         // Deconstruct CurrentSeason subrecord
         JsonNode currentSeasonNode = node.get("currentSeason");
@@ -68,7 +61,7 @@ class Competitions {
 
         return CompetitionInfo.newBuilder()
                 .setId(node.get("id").asInt())
-                .setArea(areaInfo)
+                .setAreaId(areaNode.get("id").asInt())
                 .setName(node.get("name").asText())
                 .setCode(node.get("code").asText())
                 .setType(node.get("type").asText())
