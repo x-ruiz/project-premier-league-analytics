@@ -1,5 +1,6 @@
 .idea
 *.class
+**.vscode
 
 # Ingestion Java App
 java-app/ingestion/target

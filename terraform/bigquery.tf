@@ -63,3 +63,11 @@ resource "google_bigquery_table" "pla_curated_view" {
   }
 
 }
+
+###
+# Lakehouse Setup
+###
+resource "google_bigquery_dataset" "pla_lakehouse" {
+  dataset_id = "pla_lakehouse_us"
+  location   = "us"
+}
