@@ -1,7 +1,9 @@
 package com.premierleagueanalytics.ingestion;
 
-import com.premierleagueanalytics.ingestion.CompetitionInfo;
-import com.premierleagueanalytics.ingestion.CurrentSeason;
+// Utils Imports
+import com.premierleagueanalytics.ingestion.utils.AvroUtils;
+import com.premierleagueanalytics.ingestion.utils.Api;
+import com.premierleagueanalytics.ingestion.utils.StorageBucket;
 
 
 import com.fasterxml.jackson.databind.JsonNode;

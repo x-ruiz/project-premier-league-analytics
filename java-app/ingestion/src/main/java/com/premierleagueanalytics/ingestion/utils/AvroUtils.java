@@ -1,4 +1,4 @@
-package com.premierleagueanalytics.ingestion;
+package com.premierleagueanalytics.ingestion.utils;
 
 import org.apache.avro.file.DataFileWriter;
 import org.apache.avro.io.DatumWriter;
@@ -17,7 +17,7 @@ import java.util.function.Function;
 import java.time.Instant;
 
 
-class AvroUtils {
+public class AvroUtils {
 
     // Handles converting the string timestamp from the API into a long timestamp in proper format
     public static long timestampConversion(String timestamp) {

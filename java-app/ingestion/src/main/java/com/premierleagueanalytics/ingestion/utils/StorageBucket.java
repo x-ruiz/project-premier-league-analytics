@@ -1,4 +1,4 @@
-package com.premierleagueanalytics.ingestion;
+package com.premierleagueanalytics.ingestion.utils;
 
 import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
@@ -11,7 +11,7 @@ import java.time.ZoneId;
 import java.io.IOException;
 import java.nio.file.Paths;
 
-class StorageBucket {
+public class StorageBucket {
     static String projectName = "premier-league-analytics";
     static String bucketName = "pla-landing-zone-bkt-us";
 

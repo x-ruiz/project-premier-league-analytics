@@ -1,20 +1,11 @@
-package com.premierleagueanalytics.ingestion;
+package com.premierleagueanalytics.ingestion.utils;
 
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.URI;
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-import java.io.File;
-
-
-// Avro Related
-import org.apache.avro.file.DataFileWriter;
-import org.apache.avro.io.DatumWriter;
-import org.apache.avro.specific.SpecificDatumWriter;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 // Exception Imports
@@ -22,7 +13,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.lang.InterruptedException;
 
-class Api {
+public class Api {
     private static String baseUrl = "https://api.football-data.org";
 
     public static JsonNode parseJson(String jsonString) throws Exception {
